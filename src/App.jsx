@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import headshot from './assets/headshot.png'
+import ContactForm from './assets/ContactForm/ContactForm'
 import './App.css'
 
 function App() {
@@ -59,8 +60,8 @@ function App() {
         </section>
 
         <section ref={contactRef} id="contact">
-          <h2>Contact Me</h2>
-          <p>Content for the Contact Me section will go here.</p>
+          <h2>Contact Me!</h2>
+          <ContactForm />
         </section>
       </main>
     </div>

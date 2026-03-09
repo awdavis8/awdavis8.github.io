@@ -59,7 +59,7 @@
 
 .about-photo {
   width: min(380px, 100%);
-  max-width: 400px;
+  max-width: 300px;
   aspect-ratio: 1 / 1;
   background: #6d8196;
   border-radius: 999px;

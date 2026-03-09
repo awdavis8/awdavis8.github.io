@@ -1,0 +1,80 @@
+/* Contact section */
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffe3;
+  border-radius: 2rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.contact-form label {
+  font-weight: 600;
+  padding-left:.25rem;
+  color: #6d8196;
+}
+
+.contact-form input {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0.50rem 1rem;
+  border: 2px solid #4a4a4a;
+  border-radius: 0.75rem;
+  background: #ffffe3;
+  font-size: 1rem;
+  box-sizing: border-box;
+  color: #2d3748;
+}
+
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  resize: vertical;
+  min-height: 4rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #4a4a4a;
+  border-radius: 0.75rem;
+  background: #ffffe3;
+  font-size: 1rem;
+  box-sizing: border-box;
+  color: #2d3748;
+}
+
+/* Override browser autofill styling to keep the form styling consistent */
+.contact-form input:-webkit-autofill,
+.contact-form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffe3 inset;
+  -webkit-text-fill-color: #2d3748;
+  box-shadow: 0 0 0px 1000px #ffffe3 inset;
+}
+
+.contact-form input:-webkit-autofill:focus,
+.contact-form textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffe3 inset;
+  box-shadow: 0 0 0px 1000px #ffffe3 inset;
+}
+
+.submit-button {
+  align-self: center;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffe3;
+  background: #6d8196;
+  border: 2px solid #4a4a4a;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 150ms ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+}
+
+/* header color for contact section */
+#contact h2 {
+  color: #6d8196;
+}
