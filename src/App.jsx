@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import headshot from './assets/headshot.png'
 import ContactForm from './assets/ContactForm/ContactForm'
 import './App.css'
@@ -8,14 +8,34 @@ function App() {
   const workRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
+  const [showHeader, setShowHeader] = useState(true)
+  const lastScrollY = useRef(0)
 
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY
+      const isScrollingDown = currentY > lastScrollY.current
+
+      if (isScrollingDown && currentY > 80) {
+        setShowHeader(false)
+      } else {
+        setShowHeader(true)
+      }
+
+      lastScrollY.current = currentY
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className="app">
-      <header className="site-header">
+      <header className={`site-header ${showHeader ? '' : 'site-header--hidden'}`}>
         <nav className="site-nav">
           <button className="nav-link" onClick={() => scrollTo(aboutRef)}>
             About Me
