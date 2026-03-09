@@ -1,34 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useRef } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const aboutRef = useRef(null)
+  const workRef = useRef(null)
+  const projectsRef = useRef(null)
+  const contactRef = useRef(null)
+
+  const scrollTo = (ref) => {
+    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <header className="site-header">
+        <nav className="site-nav">
+          <button className="nav-link" onClick={() => scrollTo(aboutRef)}>
+            About Me
+          </button>
+          <button className="nav-link" onClick={() => scrollTo(workRef)}>
+            Work Experience
+          </button>
+          <button className="nav-link" onClick={() => scrollTo(projectsRef)}>
+            Projects
+          </button>
+          <button className="nav-link" onClick={() => scrollTo(contactRef)}>
+            Contact Me
+          </button>
+        </nav>
+      </header>
+
+      <main className="site-main">
+        <section ref={aboutRef} id="about">
+          <h2>About Me</h2>
+          <p>Content for the About Me section will go here.</p>
+        </section>
+
+        <section ref={workRef} id="professional experience">
+          <h2>Professional Experience</h2>
+          <p>Content for the Professional Experience section will go here.</p>
+        </section>
+
+        <section ref={projectsRef} id="projects">
+          <h2>Projects</h2>
+          <p>Content for the Projects section will go here.</p>
+        </section>
+
+        <section ref={contactRef} id="contact">
+          <h2>Contact Me</h2>
+          <p>Content for the Contact Me section will go here.</p>
+        </section>
+      </main>
+    </div>
   )
 }
 
