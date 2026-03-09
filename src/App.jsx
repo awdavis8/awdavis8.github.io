@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import headshot from './assets/headshot.png'
 import './App.css'
 
 function App() {
@@ -30,10 +31,21 @@ function App() {
         </nav>
       </header>
 
-      <main className="site-main">
-        <section ref={aboutRef} id="about">
-          <h2>About Me</h2>
-          <p>Content for the About Me section will go here.</p>
+      <main>
+        <section ref={aboutRef} id="about" className="about-section">
+          <div className="about-grid">
+            <div className="about-photo" aria-label="Aaron's portrait background">
+              <img className="about-photo-img" src={headshot} alt="Aaron" />
+            </div>
+
+            <div className="about-card">
+              <h1 className="about-title">Hi, I'm Aaron!</h1>
+              <p className="about-subtitle">
+                I'm an NC State computer science graduate interested in building
+                efficient and reliable software systems.
+              </p>
+            </div>
+          </div>
         </section>
 
         <section ref={workRef} id="professional experience">
