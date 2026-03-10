@@ -13,6 +13,7 @@
 
 .site-header {
   position: sticky;
+  top: 0;
   background: #4A4A4A;
   border-radius: 16px;
   padding: 1rem 1.5rem;
@@ -110,5 +111,14 @@
 .section-heading {
   color: #6d8196;
   font-size: 2.25rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  margin: 0 auto;
 }
 

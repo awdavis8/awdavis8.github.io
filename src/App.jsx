@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import headshot from './assets/headshot.png'
 import ContactForm from './assets/ContactForm/ContactForm'
+import ItemCard from './assets/ItemCard/ItemCard'
 import './App.css'
 
 function App() {
@@ -14,6 +15,48 @@ function App() {
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+
+  const projects = [
+    {
+      id: 'project-one',
+      title: 'Project One',
+      description: 'This is the description for the first project card.',
+      image: headshot,
+    },
+    {
+      id: 'project-two',
+      title: 'Project Two',
+      description: 'This is the description for the second project card.',
+      image: headshot,
+    },
+    {
+      id: 'project-three',
+      title: 'Project Three',
+      description: 'This is the description for the third project card.',
+      image: headshot,
+    },
+  ]
+
+  const workExperience = [
+    {
+      id: 'work-one',
+      title: 'Job 1',
+      description: 'This is the description for the first work experience item.',
+      image: headshot,
+    },
+    {
+      id: 'work-two',
+      title: 'Job 2',
+      description: 'This is the description for the second work experience item.',
+      image: headshot,
+    },
+    {
+      id: 'work-three',
+      title: 'Job 3',
+      description: 'This is the description for the third work experience item.',
+      image: headshot,
+    },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,14 +112,34 @@ function App() {
           </div>
         </section>
 
-        <section ref={workRef} id="professional experience">
-          <h2 className="section-heading">Professional Experience</h2>
-          <p>Content for the Professional Experience section will go here.</p>
+        <section ref={workRef} id="work experience">
+          <h2 className="section-heading">Work Experience</h2>
+          <div className="cards-grid">
+            {workExperience.map((work) => (
+              <ItemCard
+                key={work.id}
+                image={work.image}
+                title={work.title}
+                description={work.description}
+                onClick={() => console.log(`Clicked ${work.title}`)}
+              />
+            ))}
+          </div>
         </section>
 
         <section ref={projectsRef} id="projects">
           <h2 className="section-heading">Projects</h2>
-          <p>Content for the Projects section will go here.</p>
+          <div className="cards-grid">
+            {projects.map((project) => (
+              <ItemCard
+                key={project.id}
+                image={project.image}
+                title={project.title}
+                description={project.description}
+                onClick={() => console.log(`Clicked ${project.title}`)}
+              />
+            ))}
+          </div>
         </section>
 
         <section ref={contactRef} id="contact">
