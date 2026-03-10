@@ -73,8 +73,3 @@
 .submit-button:hover {
   transform: translateY(-1px);
 }
-
-/* header color for contact section */
-#contact h2 {
-  color: #6d8196;
-}

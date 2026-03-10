@@ -70,17 +70,17 @@ function App() {
         </section>
 
         <section ref={workRef} id="professional experience">
-          <h2>Professional Experience</h2>
+          <h2 className="section-heading">Professional Experience</h2>
           <p>Content for the Professional Experience section will go here.</p>
         </section>
 
         <section ref={projectsRef} id="projects">
-          <h2>Projects</h2>
+          <h2 className="section-heading">Projects</h2>
           <p>Content for the Projects section will go here.</p>
         </section>
 
         <section ref={contactRef} id="contact">
-          <h2>Contact Me!</h2>
+          <h2 className="section-heading">Contact Me!</h2>
           <ContactForm />
         </section>
       </main>

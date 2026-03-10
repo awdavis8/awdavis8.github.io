@@ -13,9 +13,6 @@
 
 .site-header {
   position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
   background: #4A4A4A;
   border-radius: 16px;
   padding: 1rem 1.5rem;
@@ -109,3 +106,9 @@
   line-height: 1.5;
   color: #2d3748;
 }
+
+.section-heading {
+  color: #6d8196;
+  font-size: 2.25rem;
+}
+
