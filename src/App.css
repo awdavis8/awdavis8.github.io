@@ -8,16 +8,16 @@
 /* Site layout */
 .app {
   min-height: 100vh;
-  background: #CBCBCB;
+  background: #cbcbcb;
 }
 
 .site-header {
   position: sticky;
   top: 0;
-  background: #4A4A4A;
+  background: #4a4a4a;
   border-radius: 16px;
   padding: 1rem 1.5rem;
-  margin: 0rem auto 2rem;
+  margin: 0 auto 2rem;
   max-width: 1280px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   transition: transform 200ms ease, opacity 200ms ease;
@@ -32,14 +32,33 @@
 .site-nav {
   display: flex;
   gap: 1.25rem;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.site-nav--desktop {
+  display: flex;
+}
+
+.site-nav--mobile {
+  display: none;
+}
+
+.site-nav-left,
+.site-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-nav-right {
+  margin-left: auto;
 }
 
 .nav-link {
   background: transparent;
   border: none;
-  color: #FFFFE3;
+  color: #ffffe3;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -48,9 +67,75 @@
   transition: background 150ms ease, transform 150ms ease;
 }
 
+.nav-link--anchor {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .nav-link:hover {
   background: rgba(255, 255, 227, 0.15);
   transform: translateY(-1px);
+}
+
+.mobile-nav-group {
+  width: 100%;
+  position: relative;
+}
+
+.mobile-nav-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #ffffe3;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.mobile-nav-toggle:hover {
+  background: rgba(255, 255, 227, 0.15);
+  transform: translateY(-1px);
+}
+
+.mobile-nav-panel {
+  background: #4a4a4a;
+  border: 1px solid rgba(255, 255, 227, 0.35);
+  border-radius: 12px;
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.25rem;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  width: 100%;
+  z-index: 30;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.mobile-nav-panel .nav-link {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-nav-panel--contact .nav-link {
+  text-align: left;
+}
+
+.mobile-nav-panel--contact .nav-link--anchor {
+  justify-content: flex-start;
+}
+
+.mobile-nav-panel--navigate .nav-link {
+  text-align: right;
+}
+
+.mobile-nav-panel--navigate .nav-link--anchor {
+  justify-content: flex-end;
 }
 
 /* About Me section */
@@ -125,5 +210,22 @@
 .cards-grid > .item-card {
   flex: 0 1 400px;
   max-width: 400px;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0.75rem;
+  }
+
+  .site-nav--desktop {
+    display: none;
+  }
+
+  .site-nav--mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
 }
 

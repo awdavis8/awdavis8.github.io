@@ -20,12 +20,24 @@ function App() {
   const workRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
+  const mobileNavRef = useRef(null)
   const [showHeader, setShowHeader] = useState(true)
   const [openCardId, setOpenCardId] = useState(null)
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const [isMobileContactOpen, setIsMobileContactOpen] = useState(false)
   const lastScrollY = useRef(0)
+
+  const emailAddress = 'aaron@awdavis.com'
+  const linkedInUrl = 'https://www.linkedin.com/in/aaron-davis-217937242/'
+  const resumeUrl = "/Aaron's Resume.pdf"
 
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const closeMobileMenus = () => {
+    setIsMobileNavOpen(false)
+    setIsMobileContactOpen(false)
   }
 
   const projects = [
@@ -42,6 +54,9 @@ function App() {
       image: hitachiEnergyLogo,
       expandedImage1: hitachiEnergyLogo,
       expandedImage2: transformerCrossSection,
+      thumbnailRounded: false,
+      expandedImage1Rounded: false,
+      expandedImage2Rounded: false,
       skillsUsed: ['C#', 'UML Design', 'Technical Communication'],
     },
     {
@@ -59,6 +74,9 @@ function App() {
                 MQTT messages based on an internal temperature threshold.`,
       image: blindsOpening,
       expandedImage1: blindsOpening,
+      thumbnailRounded: true,
+      expandedImage1Rounded: true,
+      expandedImage2Rounded: true,
       skillsUsed: ['Python', 'MQTT', 'AWS IoT Core', '3D Modeling'],
     },
     {
@@ -77,6 +95,9 @@ function App() {
       image: wolfCafeLogo,
       expandedImage1: wolfCafeLogin,
       expandedImage2: wolfCafeManager,
+      thumbnailRounded: false,
+      expandedImage1Rounded: false,
+      expandedImage2Rounded: false,
       skillsUsed: ['Java', 'RESTful API Design', 'Spring Boot'],
     },
     {
@@ -93,6 +114,9 @@ function App() {
         project experience.`,
       image: thisWebsiteHomepage,
       expandedImage1: thisWebsiteHomepage,
+      thumbnailRounded: true,
+      expandedImage1Rounded: true,
+      expandedImage2Rounded: true,
       skillsUsed: ['React', 'UI Design', 'Github Pages'],
     }
   ]
@@ -112,6 +136,9 @@ function App() {
       image: rexrothLogo,
       expandedImage1: rexrothLogo,
       expandedImage2: rexrothControlsCabinet,
+      thumbnailRounded: true,
+      expandedImage1Rounded: true,
+      expandedImage2Rounded: true,
       skillsUsed: ['Python', 'PLC Programming', 'UI Design'],
     },
     {
@@ -129,6 +156,9 @@ function App() {
       image: gastonCollegeLogo,
       expandedImage1: gastonCollegeLogo,
       expandedImage2: taylorSeriesVisualization,
+      thumbnailRounded: false,
+      expandedImage1Rounded: false,
+      expandedImage2Rounded: false,
       skillsUsed: ['Teaching', 'Communication', 'Foundational Mathematics'],
     }
   ]
@@ -144,6 +174,8 @@ function App() {
         setShowHeader(true)
       }
 
+      closeMobileMenus()
+
       lastScrollY.current = currentY
     }
 
@@ -151,22 +183,129 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!mobileNavRef.current?.contains(event.target)) {
+        closeMobileMenus()
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('touchstart', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+      document.removeEventListener('touchstart', handleOutsideClick)
+    }
+  }, [])
+
   return (
     <div className="app">
       <header className={`site-header ${showHeader ? '' : 'site-header--hidden'}`}>
-        <nav className="site-nav">
-          <button className="nav-link" onClick={() => scrollTo(aboutRef)}>
-            About Me
-          </button>
-          <button className="nav-link" onClick={() => scrollTo(workRef)}>
-            Work Experience
-          </button>
-          <button className="nav-link" onClick={() => scrollTo(projectsRef)}>
-            Projects
-          </button>
-          <button className="nav-link" onClick={() => scrollTo(contactRef)}>
-            Contact Me
-          </button>
+        <nav className="site-nav site-nav--desktop" aria-label="Desktop navigation">
+          <div className="site-nav-left" role="list">
+            <a className="nav-link nav-link--anchor" href={`mailto:${emailAddress}`} role="listitem">
+              Email
+            </a>
+            <a
+              className="nav-link nav-link--anchor"
+              href={linkedInUrl}
+              target="_blank"
+              rel="noreferrer"
+              role="listitem"
+            >
+              LinkedIn
+            </a>
+            <a className="nav-link nav-link--anchor" href={resumeUrl} role="listitem">
+              Resume
+            </a>
+          </div>
+
+          <div className="site-nav-right">
+            <button className="nav-link" onClick={() => scrollTo(aboutRef)}>
+              About Me
+            </button>
+            <button className="nav-link" onClick={() => scrollTo(workRef)}>
+              Work Experience
+            </button>
+            <button className="nav-link" onClick={() => scrollTo(projectsRef)}>
+              Projects
+            </button>
+            <button className="nav-link" onClick={() => scrollTo(contactRef)}>
+              Contact Me
+            </button>
+          </div>
+        </nav>
+
+        <nav className="site-nav site-nav--mobile" aria-label="Mobile navigation" ref={mobileNavRef}>
+          <div className="mobile-nav-group">
+            <button
+              className="mobile-nav-toggle"
+              onClick={() => {
+                setIsMobileContactOpen((prev) => !prev)
+                setIsMobileNavOpen(false)
+              }}
+              aria-expanded={isMobileContactOpen}
+              aria-controls="mobile-contact-links"
+            >
+              Contact Me
+            </button>
+            {isMobileContactOpen && (
+              <div className="mobile-nav-panel mobile-nav-panel--contact" id="mobile-contact-links">
+                <a className="nav-link nav-link--anchor" href={`mailto:${emailAddress}`}>
+                  Email
+                </a>
+                <a className="nav-link nav-link--anchor" href={linkedInUrl} target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+                <a className="nav-link nav-link--anchor" href={resumeUrl}>
+                  Resume
+                </a>
+              </div>
+            )}
+          </div>
+
+          <div className="mobile-nav-group">
+            <button
+              className="mobile-nav-toggle"
+              onClick={() => {
+                setIsMobileNavOpen((prev) => !prev)
+                setIsMobileContactOpen(false)
+              }}
+              aria-expanded={isMobileNavOpen}
+              aria-controls="mobile-nav-links"
+            >
+              Navigate
+            </button>
+            {isMobileNavOpen && (
+              <div className="mobile-nav-panel mobile-nav-panel--navigate" id="mobile-nav-links">
+                <button className="nav-link" onClick={() => {
+                  scrollTo(aboutRef)
+                  closeMobileMenus()
+                }}>
+                  About Me
+                </button>
+                <button className="nav-link" onClick={() => {
+                  scrollTo(workRef)
+                  closeMobileMenus()
+                }}>
+                  Work Experience
+                </button>
+                <button className="nav-link" onClick={() => {
+                  scrollTo(projectsRef)
+                  closeMobileMenus()
+                }}>
+                  Projects
+                </button>
+                <button className="nav-link" onClick={() => {
+                  scrollTo(contactRef)
+                  closeMobileMenus()
+                }}>
+                  Contact Me
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
       </header>
 
@@ -197,6 +336,9 @@ function App() {
                 image={work.image}
                 expandedImage1={work.expandedImage1}
                 expandedImage2={work.expandedImage2}
+                thumbnailRounded={work.thumbnailRounded}
+                expandedImage1Rounded={work.expandedImage1Rounded}
+                expandedImage2Rounded={work.expandedImage2Rounded}
                 title={work.title}
                 summary={work.summary}
                 fullSummary={work.fullSummary}
@@ -219,6 +361,9 @@ function App() {
                 image={project.image}
                 expandedImage1={project.expandedImage1}
                 expandedImage2={project.expandedImage2}
+                thumbnailRounded={project.thumbnailRounded}
+                expandedImage1Rounded={project.expandedImage1Rounded}
+                expandedImage2Rounded={project.expandedImage2Rounded}
                 title={project.title}
                 summary={project.summary}
                 fullSummary={project.fullSummary}

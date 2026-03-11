@@ -9,6 +9,9 @@ export default function ItemCard({
   image,
   expandedImage1,
   expandedImage2,
+  thumbnailRounded = true,
+  expandedImage1Rounded = true,
+  expandedImage2Rounded = true,
   title,
   summary,
   fullSummary,
@@ -79,6 +82,9 @@ export default function ItemCard({
 
   const hasSecondExpandedImage = Boolean(expandedImage2)
   const skillsLabel = skillsUsed?.join(', ')
+  const thumbnailClassName = `item-card__image${thumbnailRounded ? '' : ' item-card__image--square'}`
+  const expandedImage1ClassName = `item-card__modal-image${expandedImage1Rounded ? '' : ' item-card__modal-image--square'}`
+  const expandedImage2ClassName = `item-card__modal-image${expandedImage2Rounded ? '' : ' item-card__modal-image--square'}`
 
   return (
     <>
@@ -91,7 +97,7 @@ export default function ItemCard({
         aria-controls={dialogId}
         aria-expanded={isOpen}
       >
-        <div className="item-card__image">
+        <div className={thumbnailClassName}>
           <img src={image} alt={title} />
         </div>
         <h3 className="item-card__title">{title}</h3>
@@ -128,11 +134,11 @@ export default function ItemCard({
           <div
             className={`item-card__modal-media${hasSecondExpandedImage ? '' : ' item-card__modal-media--single'}`}
           >
-            <div className="item-card__modal-image">
+            <div className={expandedImage1ClassName}>
               <img src={expandedImage1} alt={`${title} preview`} />
             </div>
             {hasSecondExpandedImage ? (
-              <div className="item-card__modal-image">
+              <div className={expandedImage2ClassName}>
                 <img src={expandedImage2} alt={`${title} detail`} />
               </div>
             ) : null}
