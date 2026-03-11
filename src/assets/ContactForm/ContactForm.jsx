@@ -2,12 +2,16 @@ import { useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import './ContactForm.css'
 
+/**
+ * Contact form component that submits directly via EmailJS.
+ */
 function ContactForm() {
   const formRef = useRef(null)
 
   const sendEmail = (e) => {
     e.preventDefault()
 
+    // Sends form field values from the form DOM node to the EmailJS API
     emailjs
       .sendForm(
         'service_u2nt2qe', // EmailJS service ID

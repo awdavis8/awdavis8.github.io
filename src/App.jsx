@@ -17,19 +17,25 @@ import wolfCafeLogo from './assets/ExperienceAssets/WolfHead.png'
 import thisWebsiteHomepage from './assets/ExperienceAssets/ThisWebsiteHomepage.png'
 import './App.css'
 
+/**
+ * Top-level portfolio application component.
+ *
+ * Manages section scrolling, responsive navbar selection,
+ * and shared open/close state for ItemCard dialogs.
+ */
 function App() {
   const mobileMediaQuery = '(max-width: 900px)'
   const aboutRef = useRef(null)
   const workRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
+  const lastScrollY = useRef(0)
   const [showHeader, setShowHeader] = useState(true)
   const [openCardId, setOpenCardId] = useState(null)
   const [isMobileViewport, setIsMobileViewport] = useState(() => {
     if (typeof window === 'undefined') return false
     return window.matchMedia(mobileMediaQuery).matches
   })
-  const lastScrollY = useRef(0)
 
   const emailAddress = 'aaron@awdavis.com'
   const linkedInUrl = 'https://www.linkedin.com/in/aaron-davis-217937242/'
@@ -170,6 +176,7 @@ function App() {
     }
 
     setIsMobileViewport(mediaQueryList.matches)
+    // Keep navbar in sync when viewport size crosses the mobile breakpoint.
     mediaQueryList.addEventListener('change', handleViewportChange)
 
     return () => {
@@ -182,6 +189,7 @@ function App() {
       const currentY = window.scrollY
       const isScrollingDown = currentY > lastScrollY.current
 
+      // Hide the sticky header while scrolling down.
       if (isScrollingDown && currentY > 80) {
         setShowHeader(false)
       } else {

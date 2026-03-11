@@ -1,5 +1,17 @@
 import './DesktopNavbar.css'
 
+/**
+ * Desktop navigation bar.
+ *
+ * @param {Object} props Component props.
+ * @param {string} props.emailAddress Email used to build the mailto link.
+ * @param {string} props.linkedInUrl External LinkedIn profile URL.
+ * @param {string} props.resumeUrl URL/path to the resume document.
+ * @param {() => void} props.onAboutClick Scroll handler for the About section.
+ * @param {() => void} props.onWorkClick Scroll handler for the Work Experience section.
+ * @param {() => void} props.onProjectsClick Scroll handler for the Projects section.
+ * @param {() => void} props.onContactClick Scroll handler for the Contact section.
+ */
 function DesktopNavbar({
   emailAddress,
   linkedInUrl,

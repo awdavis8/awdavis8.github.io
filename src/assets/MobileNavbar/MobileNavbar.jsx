@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import './MobileNavbar.css'
 
+/**
+ * Mobile navigation with two dropdown panels.
+ *
+ * @param {Object} props Component props.
+ * @param {string} props.emailAddress Email used to build the mailto link.
+ * @param {string} props.linkedInUrl External LinkedIn profile URL.
+ * @param {string} props.resumeUrl URL/path to the resume document.
+ * @param {() => void} props.onAboutClick Scroll handler for the About section.
+ * @param {() => void} props.onWorkClick Scroll handler for the Work Experience section.
+ * @param {() => void} props.onProjectsClick Scroll handler for the Projects section.
+ * @param {() => void} props.onContactClick Scroll handler for the Contact section.
+ */
 function MobileNavbar({
   emailAddress,
   linkedInUrl,
@@ -20,6 +32,7 @@ function MobileNavbar({
   }
 
   useEffect(() => {
+    // Close menus when tapping/clicking outside the nav container.
     const handleOutsideClick = (event) => {
       if (!mobileNavRef.current?.contains(event.target)) {
         closeMobileMenus()
@@ -36,6 +49,7 @@ function MobileNavbar({
   }, [])
 
   useEffect(() => {
+    // Close floating panels when the page scrolls
     const handleScroll = () => {
       closeMobileMenus()
     }
