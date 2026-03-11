@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import ContactForm from './assets/ContactForm/ContactForm'
+import DesktopNavbar from './assets/DesktopNavbar/DesktopNavbar'
 import ItemCard from './assets/ItemCard/ItemCard'
+import MobileNavbar from './assets/MobileNavbar/MobileNavbar'
 import headshot from './assets/headshot.png'
 import rexrothLogo from './assets/ExperienceAssets/RexrothLogo.png'
 import rexrothControlsCabinet from './assets/ExperienceAssets/RexrothControlsCabinet.jpg'
@@ -20,11 +22,8 @@ function App() {
   const workRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
-  const mobileNavRef = useRef(null)
   const [showHeader, setShowHeader] = useState(true)
   const [openCardId, setOpenCardId] = useState(null)
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-  const [isMobileContactOpen, setIsMobileContactOpen] = useState(false)
   const lastScrollY = useRef(0)
 
   const emailAddress = 'aaron@awdavis.com'
@@ -33,11 +32,6 @@ function App() {
 
   const scrollTo = (ref) => {
     ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  const closeMobileMenus = () => {
-    setIsMobileNavOpen(false)
-    setIsMobileContactOpen(false)
   }
 
   const projects = [
@@ -174,8 +168,6 @@ function App() {
         setShowHeader(true)
       }
 
-      closeMobileMenus()
-
       lastScrollY.current = currentY
     }
 
@@ -183,130 +175,28 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (!mobileNavRef.current?.contains(event.target)) {
-        closeMobileMenus()
-      }
-    }
-
-    document.addEventListener('mousedown', handleOutsideClick)
-    document.addEventListener('touchstart', handleOutsideClick)
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-      document.removeEventListener('touchstart', handleOutsideClick)
-    }
-  }, [])
-
   return (
     <div className="app">
       <header className={`site-header ${showHeader ? '' : 'site-header--hidden'}`}>
-        <nav className="site-nav site-nav--desktop" aria-label="Desktop navigation">
-          <div className="site-nav-left" role="list">
-            <a className="nav-link nav-link--anchor" href={`mailto:${emailAddress}`} role="listitem">
-              Email
-            </a>
-            <a
-              className="nav-link nav-link--anchor"
-              href={linkedInUrl}
-              target="_blank"
-              rel="noreferrer"
-              role="listitem"
-            >
-              LinkedIn
-            </a>
-            <a className="nav-link nav-link--anchor" href={resumeUrl} role="listitem">
-              Resume
-            </a>
-          </div>
+        <DesktopNavbar
+          emailAddress={emailAddress}
+          linkedInUrl={linkedInUrl}
+          resumeUrl={resumeUrl}
+          onAboutClick={() => scrollTo(aboutRef)}
+          onWorkClick={() => scrollTo(workRef)}
+          onProjectsClick={() => scrollTo(projectsRef)}
+          onContactClick={() => scrollTo(contactRef)}
+        />
 
-          <div className="site-nav-right">
-            <button className="nav-link" onClick={() => scrollTo(aboutRef)}>
-              About Me
-            </button>
-            <button className="nav-link" onClick={() => scrollTo(workRef)}>
-              Work Experience
-            </button>
-            <button className="nav-link" onClick={() => scrollTo(projectsRef)}>
-              Projects
-            </button>
-            <button className="nav-link" onClick={() => scrollTo(contactRef)}>
-              Contact Me
-            </button>
-          </div>
-        </nav>
-
-        <nav className="site-nav site-nav--mobile" aria-label="Mobile navigation" ref={mobileNavRef}>
-          <div className="mobile-nav-group">
-            <button
-              className="mobile-nav-toggle"
-              onClick={() => {
-                setIsMobileContactOpen((prev) => !prev)
-                setIsMobileNavOpen(false)
-              }}
-              aria-expanded={isMobileContactOpen}
-              aria-controls="mobile-contact-links"
-            >
-              Contact Me
-            </button>
-            {isMobileContactOpen && (
-              <div className="mobile-nav-panel mobile-nav-panel--contact" id="mobile-contact-links">
-                <a className="nav-link nav-link--anchor" href={`mailto:${emailAddress}`}>
-                  Email
-                </a>
-                <a className="nav-link nav-link--anchor" href={linkedInUrl} target="_blank" rel="noreferrer">
-                  LinkedIn
-                </a>
-                <a className="nav-link nav-link--anchor" href={resumeUrl}>
-                  Resume
-                </a>
-              </div>
-            )}
-          </div>
-
-          <div className="mobile-nav-group">
-            <button
-              className="mobile-nav-toggle"
-              onClick={() => {
-                setIsMobileNavOpen((prev) => !prev)
-                setIsMobileContactOpen(false)
-              }}
-              aria-expanded={isMobileNavOpen}
-              aria-controls="mobile-nav-links"
-            >
-              Navigate
-            </button>
-            {isMobileNavOpen && (
-              <div className="mobile-nav-panel mobile-nav-panel--navigate" id="mobile-nav-links">
-                <button className="nav-link" onClick={() => {
-                  scrollTo(aboutRef)
-                  closeMobileMenus()
-                }}>
-                  About Me
-                </button>
-                <button className="nav-link" onClick={() => {
-                  scrollTo(workRef)
-                  closeMobileMenus()
-                }}>
-                  Work Experience
-                </button>
-                <button className="nav-link" onClick={() => {
-                  scrollTo(projectsRef)
-                  closeMobileMenus()
-                }}>
-                  Projects
-                </button>
-                <button className="nav-link" onClick={() => {
-                  scrollTo(contactRef)
-                  closeMobileMenus()
-                }}>
-                  Contact Me
-                </button>
-              </div>
-            )}
-          </div>
-        </nav>
+        <MobileNavbar
+          emailAddress={emailAddress}
+          linkedInUrl={linkedInUrl}
+          resumeUrl={resumeUrl}
+          onAboutClick={() => scrollTo(aboutRef)}
+          onWorkClick={() => scrollTo(workRef)}
+          onProjectsClick={() => scrollTo(projectsRef)}
+          onContactClick={() => scrollTo(contactRef)}
+        />
       </header>
 
       <main>

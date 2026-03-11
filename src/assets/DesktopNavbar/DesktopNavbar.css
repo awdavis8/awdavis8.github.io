@@ -1,0 +1,47 @@
+.desktop-nav {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.desktop-nav-left,
+.desktop-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.desktop-nav-right {
+  margin-left: auto;
+}
+
+.desktop-nav-link {
+  background: transparent;
+  border: none;
+  color: #ffffe3;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.desktop-nav-link--anchor {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-nav-link:hover {
+  background: rgba(255, 255, 227, 0.15);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+}
