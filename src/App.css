@@ -111,14 +111,19 @@
 .section-heading {
   color: #6d8196;
   font-size: 2.25rem;
+  margin-top: 8rem;
 }
 
 .cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: stretch;
   gap: 1.5rem;
-  padding: 2rem 0;
-  margin: 0 auto;
+}
+
+.cards-grid > .item-card {
+  flex: 0 1 400px;
+  max-width: 400px;
 }
 
