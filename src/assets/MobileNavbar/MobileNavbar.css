@@ -1,5 +1,8 @@
 .mobile-nav {
-  display: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: start;
 }
 
 .mobile-nav-group {
@@ -80,13 +83,4 @@
 
 .mobile-nav-panel--navigate .mobile-nav-link--anchor {
   justify-content: flex-end;
-}
-
-@media (max-width: 900px) {
-  .mobile-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    align-items: start;
-  }
 }

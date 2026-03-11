@@ -18,12 +18,17 @@ import thisWebsiteHomepage from './assets/ExperienceAssets/ThisWebsiteHomepage.p
 import './App.css'
 
 function App() {
+  const mobileMediaQuery = '(max-width: 900px)'
   const aboutRef = useRef(null)
   const workRef = useRef(null)
   const projectsRef = useRef(null)
   const contactRef = useRef(null)
   const [showHeader, setShowHeader] = useState(true)
   const [openCardId, setOpenCardId] = useState(null)
+  const [isMobileViewport, setIsMobileViewport] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia(mobileMediaQuery).matches
+  })
   const lastScrollY = useRef(0)
 
   const emailAddress = 'aaron@awdavis.com'
@@ -158,6 +163,21 @@ function App() {
   ]
 
   useEffect(() => {
+    const mediaQueryList = window.matchMedia(mobileMediaQuery)
+
+    const handleViewportChange = (event) => {
+      setIsMobileViewport(event.matches)
+    }
+
+    setIsMobileViewport(mediaQueryList.matches)
+    mediaQueryList.addEventListener('change', handleViewportChange)
+
+    return () => {
+      mediaQueryList.removeEventListener('change', handleViewportChange)
+    }
+  }, [])
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY
       const isScrollingDown = currentY > lastScrollY.current
@@ -178,25 +198,27 @@ function App() {
   return (
     <div className="app">
       <header className={`site-header ${showHeader ? '' : 'site-header--hidden'}`}>
-        <DesktopNavbar
-          emailAddress={emailAddress}
-          linkedInUrl={linkedInUrl}
-          resumeUrl={resumeUrl}
-          onAboutClick={() => scrollTo(aboutRef)}
-          onWorkClick={() => scrollTo(workRef)}
-          onProjectsClick={() => scrollTo(projectsRef)}
-          onContactClick={() => scrollTo(contactRef)}
-        />
-
-        <MobileNavbar
-          emailAddress={emailAddress}
-          linkedInUrl={linkedInUrl}
-          resumeUrl={resumeUrl}
-          onAboutClick={() => scrollTo(aboutRef)}
-          onWorkClick={() => scrollTo(workRef)}
-          onProjectsClick={() => scrollTo(projectsRef)}
-          onContactClick={() => scrollTo(contactRef)}
-        />
+        {isMobileViewport ? (
+          <MobileNavbar
+            emailAddress={emailAddress}
+            linkedInUrl={linkedInUrl}
+            resumeUrl={resumeUrl}
+            onAboutClick={() => scrollTo(aboutRef)}
+            onWorkClick={() => scrollTo(workRef)}
+            onProjectsClick={() => scrollTo(projectsRef)}
+            onContactClick={() => scrollTo(contactRef)}
+          />
+        ) : (
+          <DesktopNavbar
+            emailAddress={emailAddress}
+            linkedInUrl={linkedInUrl}
+            resumeUrl={resumeUrl}
+            onAboutClick={() => scrollTo(aboutRef)}
+            onWorkClick={() => scrollTo(workRef)}
+            onProjectsClick={() => scrollTo(projectsRef)}
+            onContactClick={() => scrollTo(contactRef)}
+          />
+        )}
       </header>
 
       <main>

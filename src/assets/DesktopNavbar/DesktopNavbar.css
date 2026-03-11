@@ -39,9 +39,3 @@
   background: rgba(255, 255, 227, 0.15);
   transform: translateY(-1px);
 }
-
-@media (max-width: 900px) {
-  .desktop-nav {
-    display: none;
-  }
-}
