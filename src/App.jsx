@@ -7,6 +7,7 @@ import headshot from './assets/headshot.png'
 import rexrothLogo from './assets/ExperienceAssets/RexrothLogo.png'
 import rexrothControlsCabinet from './assets/ExperienceAssets/RexrothControlsCabinet.jpg'
 import gastonCollegeLogo from './assets/ExperienceAssets/GastonCollegeLogo.webp'
+import daimlerTruckLogo from './assets/ExperienceAssets/DaimlerTruckLogo.png'
 import taylorSeriesVisualization from './assets/ExperienceAssets/TaylorSeriesVisualization.jpg'
 import hitachiEnergyLogo from './assets/ExperienceAssets/HitachiLogo.webp'
 import transformerCrossSection from './assets/ExperienceAssets/TransformerCrossSection.png'
@@ -129,6 +130,24 @@ function App() {
   const workExperience = [
     {
       workId: 'work-one',
+      title: 'IT Developer Intern',
+      summary: 'Developed a full-stack web application using Blazor and ASP.NET Core to streamline overtime allocation.',
+      fullSummary:
+        `During my ongoing internship at Daimler Truck, I am developing a full-stack web application to streamline the company's overtime 
+        allocation process. Built with Blazor WebAssembly and ASP.NET Core, the application leverages a unified C# technology stack to 
+        simplify development across the frontend and backend. A RESTful API, backed by a SQL database, manages business logic and persistent
+        data while supporting efficient communication between system components. The solution is designed for deployment on a single IIS 
+        server, reducing hosting complexity and simplifying maintenance. Through this project, I have strengthened my experience with full-stack
+        web development, REST API design, and database integration.`,
+      image: daimlerTruckLogo,
+      expandedImage1: daimlerTruckLogo,
+      thumbnailRounded: true,
+      expandedImage1Rounded: true,
+      expandedImage2Rounded: true,
+      skillsUsed: ['Blazor', 'ASP.Net Core', 'Full Stack Development'],
+    },
+    {
+      workId: 'work-two',
       title: 'Electrical Engineering Internship',
       summary: 'Developed an automated testing procedure using PLC programming and Python while interning at Bosch Rexroth.',
       fullSummary:
@@ -147,7 +166,7 @@ function App() {
       skillsUsed: ['Python', 'PLC Programming', 'UI Design'],
     },
     {
-      workId: 'work-two',
+      workId: 'work-three',
       title: 'Calculus/Physics Tutor',
       summary: `Provided one-on-one tutoring to Gaston College students in both Calculus and Physics, 
                 supporting comprehension of complex technical concepts.`,
